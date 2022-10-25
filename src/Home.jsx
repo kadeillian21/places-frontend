@@ -4,6 +4,7 @@ import { useState, UseEffect } from "react";
 import { PlacesIndex } from "./PlacesIndex";
 import { PlacesShow } from "./PlacesShow";
 import { Modal } from "./Modal";
+import { PlacesNew } from "./PlacesNew";
 
 export function Home() {
   const [places, setPlaces] = useState([]);
@@ -29,6 +30,14 @@ export function Home() {
     setIsPlacesShowVisible(false);
   };
 
+  const handleCreatePlace = (params, sucessCallback) => {
+    console.log("handleCreatePlace", params);
+    axios.post("http://localhost:3000/places.json", params).then((response) => {
+      setPlaces([...places, response.data]);
+      sucessCallback();
+    });
+  };
+
   useEffect(handleIndexPlaces, []);
 
   return (
@@ -37,6 +46,7 @@ export function Home() {
       <Modal show={isPlacesShowVisible} onClose={handleHidePlace}>
         <PlacesShow place={currentPlace} />
       </Modal>
+      <PlacesNew onCreatePlace={handleCreatePlace} />
     </div>
   );
 }

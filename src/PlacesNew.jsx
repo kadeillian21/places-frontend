@@ -27,6 +27,7 @@ export function PlacesNew(props) {
         <div>
           Description: <input name="description" type="text" />
         </div>
+        <button type="submit">Create Place</button>
       </form>
     </div>
   );
