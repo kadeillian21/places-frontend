@@ -55,13 +55,21 @@ export function Home() {
     });
   };
 
+  const handleDestroyPlace = (place) => {
+    console.log("handleDestroyPlace", place);
+    axios.delete(`http://localhost:3000/places/${place.id}.json`).then((response) => {
+      setPlaces(places.filter((p) => p.id !== place.id));
+      handleHidePlace();
+    });
+  };
+
   useEffect(handleIndexPlaces, []);
 
   return (
     <div>
       <PlacesIndex places={places} onSelectPlace={handleShowPlace} />
       <Modal show={isPlacesShowVisible} onClose={handleHidePlace}>
-        <PlacesShow place={currentPlace} onUpdatePlace={handleUpdatePlace} />
+        <PlacesShow place={currentPlace} onUpdatePlace={handleUpdatePlace} onDestroyPlace={handleDestroyPlace} />
       </Modal>
       <PlacesNew onCreatePlace={handleCreatePlace} />
     </div>
