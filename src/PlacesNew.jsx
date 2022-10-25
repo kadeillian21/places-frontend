@@ -14,16 +14,16 @@ export function PlacesNew(props) {
         </div>
         <div>
           Image URL: <input name="image-url" type="text" />
-        </div>{" "}
+        </div>
         <div>
           Country: <input name="country" type="text" />
-        </div>{" "}
+        </div>
         <div>
-          Latitude: <input name="latitude" type="number" />
-        </div>{" "}
+          Latitude: <input name="latitude" type="number" step={0.000001} />
+        </div>
         <div>
-          Longitude: <input name="longitude" type="number" />
-        </div>{" "}
+          Longitude: <input name="longitude" type="number" step={0.000001} />
+        </div>
         <div>
           Description: <input name="description" type="text" />
         </div>
