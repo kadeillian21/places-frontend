@@ -38,13 +38,30 @@ export function Home() {
     });
   };
 
+  const handleUpdatePlace = (id, params, sucessCallback) => {
+    console.log("handleUpdatePlace", params);
+    axios.patch(`http://localhost:3000/places/${id}.json`, params).then((response) => {
+      setPlaces(
+        places.map((place) => {
+          if (place.id === response.data.id) {
+            return response.data;
+          } else {
+            return place;
+          }
+        })
+      );
+      sucessCallback();
+      handleHidePlace();
+    });
+  };
+
   useEffect(handleIndexPlaces, []);
 
   return (
     <div>
       <PlacesIndex places={places} onSelectPlace={handleShowPlace} />
       <Modal show={isPlacesShowVisible} onClose={handleHidePlace}>
-        <PlacesShow place={currentPlace} />
+        <PlacesShow place={currentPlace} onUpdatePlace={handleUpdatePlace} />
       </Modal>
       <PlacesNew onCreatePlace={handleCreatePlace} />
     </div>
