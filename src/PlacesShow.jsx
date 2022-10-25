@@ -5,6 +5,10 @@ export function PlacesShow(props) {
     props.onUpdatePlace(props.place.id, params, () => event.target.rest);
   };
 
+  const handleClick = () => {
+    props.onDestroyPlace(props.place);
+  };
+
   return (
     <div>
       <img src={props.place.image_url} className="modal-image" />
@@ -12,6 +16,7 @@ export function PlacesShow(props) {
       <h3>{props.place.country}</h3>
       <h5>This is where the lat long will go. Figure out how to make lat on the right and long on the left</h5>
       <p>{props.place.description}</p>
+      <button onClick={handleClick}>Destroy Place</button>
       <form onSubmit={handleSubmit}>
         <div>
           Location Name: <input name="name" type="text" defaultValue={props.place.name} />
